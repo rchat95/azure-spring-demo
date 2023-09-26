@@ -11,7 +11,7 @@ public class DemoRcSpringBootApplication {
 
     @GetMapping("/message")
     public String Message() {
-        return "Congrats! You app deployed successfully in Azure!";
+        return "Congrats!! You app deployed successfully in Azure!";
     }
 
     public static void main(String[] args) {
