@@ -4,6 +4,7 @@ import com.barclays.dto.RegisterModel;
 import com.barclays.dto.UserDto;
 import com.barclays.entity.Case;
 import com.barclays.entity.CaseStatus;
+import com.barclays.entity.CaseType;
 import com.barclays.entity.User;
 import com.barclays.services.CasesService;
 import com.barclays.services.UserService;
@@ -51,6 +52,8 @@ public class UserController {
             newCase.setCasetype(registerModel.getCategory());
             newCase.setClient_id(registeredUser.getUserId());
             newCase.setGp_name(registerModel.getGpName());
+            CaseType caseType = casesService.getCaseTypeByCaseTypeId(registerModel.getCategory());
+            newCase.setPriority(caseType.getCase_type_priority());
             Case savedCase = casesService.createNewCase(newCase);
             CaseStatus newCaseStatus = new CaseStatus();
             newCaseStatus.setCaseId(savedCase.getCaseId());
