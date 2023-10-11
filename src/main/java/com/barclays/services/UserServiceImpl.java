@@ -1,5 +1,6 @@
 package com.barclays.services;
 
+import com.barclays.dto.RegisterModel;
 import com.barclays.dto.UserDto;
 import com.barclays.entity.User;
 import com.barclays.repository.UserRepository;
@@ -17,19 +18,18 @@ public class UserServiceImpl implements UserService {
         this.userRepository = userRepository;
     }
 
-    public int registerUser(UserDto userDto) {
+    public User registerUser(RegisterModel userDto) {
         User user = new User();
-        user.setUserId(userDto.getUserId());
-        user.setFirst_name(userDto.getFirst_name());
-        user.setLast_name(userDto.getLast_name());
+        user.setUserId(userDto.getLastName()+"_123");
+        user.setFirst_name(userDto.getFirstName());
+        user.setLast_name(userDto.getLastName());
         user.setEmail(userDto.getEmail());
-        user.setPassword(userDto.getPassword());
-        user.setPhone(userDto.getPhone());
-        user.setAddress_1(userDto.getAddress_1());
-        user.setAddress_2(userDto.getAddress_2());
-        user.setPostcode(userDto.getPostcode());
-        userRepository.save(user);
-        return 1;
+        user.setPassword("password123");
+        user.setPhone(userDto.getPhoneNumber());
+        user.setAddress_1(userDto.getAddress1());
+        user.setAddress_2(userDto.getAddress2());
+        user.setPostcode(userDto.getZipCode());
+        return userRepository.save(user);
     }
 
     public User findUserByEmail(String email) {
@@ -44,7 +44,7 @@ public class UserServiceImpl implements UserService {
         return userRepository.findByEmail(email);
     }
 
-    private UserDto convertUserEntityToDto(User user) {
+    public UserDto convertUserEntityToDto(User user) {
         UserDto userDto = new UserDto();
         userDto.setUserId(user.getUserId());
         userDto.setFirst_name(user.getFirst_name());

@@ -9,20 +9,22 @@ import lombok.Getter;
 import lombok.NoArgsConstructor;
 import lombok.Setter;
 
+import java.sql.Date;
+import java.sql.Timestamp;
+
 @Getter
 @Setter
 @NoArgsConstructor
 @AllArgsConstructor
 @Entity
-@Table(name = "le_cases")
-public class Case {
+@Table(name = "le_case_status")
+public class CaseStatus {
     @Id
     @Column(name = "case_id")
     private String caseId;
-    private String casetype;
-    private String client_id;
-    private String anonymous_name;
-    private String gp_name;
-    private int priority;
-    private String referral_personname;
+    private String case_status;
+    private Timestamp updated_date;
+    @Column(name = "serviceprovider_id")
+    private String serviceProvider_id;
+    private String notes;
 }
