@@ -11,7 +11,7 @@ import lombok.Setter;
 @AllArgsConstructor
 public class CasesDto {
     private String caseId;
-    private String casetype_id;
+    private String casetype;
     private String client_id;
     private String anonymous_name;
     private String gp_name;
