@@ -4,7 +4,7 @@ import com.barclays.dto.UserDto;
 import com.barclays.entity.User;
 
 public interface UserService {
-    public User registerUser(UserDto userDto);
+    public int registerUser(UserDto userDto);
 
     public User findUserByEmail(String email);
 
