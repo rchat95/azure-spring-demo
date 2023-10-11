@@ -2,6 +2,7 @@ package com.barclays.controllers;
 
 import com.barclays.dto.UserDto;
 import com.barclays.entity.User;
+import com.barclays.services.CasesService;
 import com.barclays.services.UserService;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.http.HttpStatus;
@@ -16,6 +17,9 @@ public class UserController {
     @Autowired
     private UserService userService;
 
+    @Autowired
+    private CasesService casesService;
+
     @GetMapping("/register")
     public String showRegistrationForm(Model model) {
         // create model object to store form data
@@ -25,13 +29,16 @@ public class UserController {
     }
 
     @PostMapping("/register")
-    public ResponseEntity<User> registerUser(@RequestBody UserDto userDto, Model model) {
+    public ResponseEntity<String> registerUser(@RequestBody UserDto userDto, Model model) {
         User existingUser = userService.findUserByEmail(userDto.getEmail());
         if(null!=existingUser && null!=existingUser.getEmail()) {
             return ResponseEntity.badRequest().build();
         }
-        User registeredUser = userService.registerUser(userDto);
-        return ResponseEntity.ok(registeredUser);
+        int registeredUser = userService.registerUser(userDto);
+        if(registeredUser==1) {
+//            casesService.createNewCase()
+        }
+        return ResponseEntity.ok("Success");
     }
 
     @PostMapping("/login")
