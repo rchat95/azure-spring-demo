@@ -30,14 +30,6 @@ public class UserController {
     @Autowired
     private CasesService casesService;
 
-    @GetMapping("/register")
-    public String showRegistrationForm(Model model) {
-        // create model object to store form data
-        UserDto user = new UserDto();
-        model.addAttribute("user", user);
-        return "register";
-    }
-
     @CrossOrigin
     @PostMapping("/register")
     public ResponseEntity<String> registerUser(@RequestBody RegisterModel registerModel) {

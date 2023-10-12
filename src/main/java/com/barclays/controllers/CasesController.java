@@ -29,6 +29,7 @@ public class CasesController {
     @Autowired
     private CasesService casesService;
 
+    @CrossOrigin
     @GetMapping("/getDetailsByCaseId/{id}")
     public ResponseEntity<CaseDetailDto> showCasesByCaseId(@PathVariable String id) {
         Case target_case = casesService.findByCaseId(id);
@@ -50,6 +51,7 @@ public class CasesController {
         return ResponseEntity.ok(target_casedetails);
     }
 
+    @CrossOrigin
     @GetMapping("/getCaseIdByProviderId/{id}")
     public ResponseEntity<List<String>> showCaseIdByProviderId(@PathVariable String id) {
         List<CaseStatus> target_cases = casesService.findByProviderId(id);
@@ -60,6 +62,7 @@ public class CasesController {
         return ResponseEntity.ok(CaseIdList);
     }
 
+    @CrossOrigin
     @GetMapping("/getCaseIdByClientId/{id}")
     public ResponseEntity<List<String>> showCaseIdByClientId(@PathVariable String id) {
         List<Case> target_cases = casesService.findByClientId(id);
