@@ -14,15 +14,11 @@ import lombok.Setter;
 @NoArgsConstructor
 @AllArgsConstructor
 @Entity
-@Table(name = "le_cases")
-public class Case {
+@Table(name = "le_casetype")
+public class CaseType {
     @Id
-    @Column(name = "case_id")
-    private String caseId;
-    private String casetype_id;
-    private String client_id;
-    private String anonymous_name;
-    private String gp_name;
-    private int priority;
-    private String referral_personname;
+    @Column(name = "case_type_id")
+    private String caseTypeId;
+    private String case_type;
+    private int case_type_priority;
 }

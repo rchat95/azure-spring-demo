@@ -1,13 +1,19 @@
 package com.barclays.services;
 
+
 import java.util.List;
 
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Service;
 
+
+import com.barclays.dto.RegisterModel;
+
 import com.barclays.entity.Case;
 import com.barclays.entity.CaseStatus;
+import com.barclays.entity.CaseType;
 import com.barclays.repository.CaseStatusRepository;
+import com.barclays.repository.CaseTypeRepository;
 import com.barclays.repository.CasesRepository;
 
 @Service
@@ -16,7 +22,11 @@ public class CasesServiceImpl implements CasesService{
     @Autowired
     private CasesRepository casesRepository;
 
+    @Autowired
     private CaseStatusRepository caseStatusRepository;
+
+    @Autowired
+    private CaseTypeRepository caseTypeRepository;
 
     @Override
     public Case findByCaseId(String caseId) {
@@ -34,6 +44,7 @@ public class CasesServiceImpl implements CasesService{
         return caseStatusRepository.save(caseStatusDetail);
     }
 
+
     @Override
     public List<CaseStatus> findByProviderId(String providerId){
         return caseStatusRepository.findByProviderId(providerId);
@@ -47,6 +58,11 @@ public class CasesServiceImpl implements CasesService{
     @Override
     public CaseStatus findStatusByCaseId(String case_id){
         return caseStatusRepository.findByCaseId(case_id);
+
+    @Override
+    public CaseType getCaseTypeByCaseTypeId(String caseTypeId) {
+        return caseTypeRepository.findByCaseTypeId(caseTypeId);
+
     }
 
 
