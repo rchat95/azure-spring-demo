@@ -69,6 +69,7 @@ public class CasesController {
         return ResponseEntity.ok(CaseIdList);
     }
 
+    @CrossOrigin
     @PostMapping("/addCase")
     public ResponseEntity<String> createNewCase(@RequestBody RegisterModel registerModel) {
         Random random = new Random();

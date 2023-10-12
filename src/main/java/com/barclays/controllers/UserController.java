@@ -38,6 +38,7 @@ public class UserController {
         return "register";
     }
 
+    @CrossOrigin
     @PostMapping("/register")
     public ResponseEntity<String> registerUser(@RequestBody RegisterModel registerModel) {
         User existingUser = userService.findUserByEmail(registerModel.getEmail());
