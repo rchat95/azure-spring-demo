@@ -19,7 +19,7 @@ public class Case {
     @Id
     @Column(name = "case_id")
     private String caseId;
-    private String casetype;
+    private String casetype_id;
     private String client_id;
     private String anonymous_name;
     private String gp_name;
