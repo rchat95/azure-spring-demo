@@ -42,14 +42,14 @@ public class UserController {
         User existingUser = userService.findUserByEmail(registerModel.getEmail());
 
         if(null!=existingUser && null!=existingUser.getEmail()) {
-            return ResponseEntity.badRequest().build();
+            return ResponseEntity.status(204).body("User with email id exists. please login");
         }
         User registeredUser = userService.registerUser(registerModel);
         Random random = new Random();
         if(registeredUser != null) {
             Case newCase = new Case();
             newCase.setCaseId(String.format("%04d", random.nextInt(1000)));
-            newCase.setCasetype(registerModel.getCategory());
+            newCase.setCasetype_id(registerModel.getCategory());
             newCase.setClient_id(registeredUser.getUserId());
             newCase.setGp_name(registerModel.getGpName());
             CaseType caseType = casesService.getCaseTypeByCaseTypeId(registerModel.getCategory());
