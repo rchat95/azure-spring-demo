@@ -8,6 +8,8 @@ import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.security.crypto.password.PasswordEncoder;
 import org.springframework.stereotype.Service;
 
+import java.sql.Date;
+
 @Service
 public class UserServiceImpl implements UserService {
 
@@ -21,8 +23,8 @@ public class UserServiceImpl implements UserService {
     public User registerUser(RegisterModel userDto) {
         User user = new User();
         user.setUserId(userDto.getLastName()+"_123");
-        user.setFirst_name(userDto.getFirstName());
-        user.setLast_name(userDto.getLastName());
+        user.setFirstName(userDto.getFirstName());
+        user.setLastName(userDto.getLastName());
         user.setEmail(userDto.getEmail());
         user.setPassword("password123");
         user.setPhone(userDto.getPhoneNumber());
@@ -44,11 +46,16 @@ public class UserServiceImpl implements UserService {
         return userRepository.findByEmail(email);
     }
 
+    @Override
+    public User checkDuplicateUser(String firstname, String lastName, Date dateOfBirth) {
+        return userRepository.findByFirstNameAndLastNameAndDob(firstname, lastName, dateOfBirth);
+    }
+
     public UserDto convertUserEntityToDto(User user) {
         UserDto userDto = new UserDto();
         userDto.setUserId(user.getUserId());
-        userDto.setFirst_name(user.getFirst_name());
-        userDto.setLast_name(user.getLast_name());
+        userDto.setFirstName(user.getFirstName());
+        userDto.setLastName(user.getLastName());
         userDto.setEmail(user.getEmail());
         userDto.setPassword(user.getPassword());
         userDto.setPassword(user.getPassword());
