@@ -19,6 +19,7 @@ import java.sql.Timestamp;
 import java.text.SimpleDateFormat;
 import java.util.Random;
 
+@CrossOrigin(maxAge = 3600)
 @RestController
 @RequestMapping("/api/users")
 public class UserController {
@@ -43,6 +44,13 @@ public class UserController {
 
         if(null!=existingUser && null!=existingUser.getEmail()) {
             return ResponseEntity.status(204).body("User with email id exists. please login");
+        }
+        Date userDob = Date.valueOf(registerModel.getDob());
+        System.out.println("Sql date: " + userDob.toString());
+        existingUser = userService.checkDuplicateUser(registerModel.getFirstName(),
+                registerModel.getLastName(), userDob);
+        if (null!=existingUser) {
+            return ResponseEntity.status(204).body("User id already exists. please login");
         }
         User registeredUser = userService.registerUser(registerModel);
         Random random = new Random();

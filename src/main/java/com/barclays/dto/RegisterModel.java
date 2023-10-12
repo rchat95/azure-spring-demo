@@ -5,6 +5,8 @@ import lombok.Getter;
 import lombok.NoArgsConstructor;
 import lombok.Setter;
 
+import java.sql.Date;
+
 @Getter
 @Setter
 @NoArgsConstructor
@@ -14,6 +16,7 @@ public class RegisterModel {
     private String firstName;
     private String middleName;
     private String lastName;
+    private String dob;
     private String email;
     private String phoneNumber;
     private String address1;

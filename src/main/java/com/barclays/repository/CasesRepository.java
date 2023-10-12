@@ -11,6 +11,6 @@ import com.barclays.entity.Case;
 public interface CasesRepository extends JpaRepository<Case, String> {
     Case findByCaseId(String caseId);
 
-    @Query("SELECT c FROM Case c WHERE c.client_Id = :clientId")
+    @Query("SELECT c FROM Case c WHERE c.client_id = :clientId")
     List<Case> findByClientId(@Param("clientId") String clientId);
 }
