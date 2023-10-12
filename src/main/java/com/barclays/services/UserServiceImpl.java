@@ -34,6 +34,7 @@ public class UserServiceImpl implements UserService {
         return userRepository.save(user);
     }
 
+    @Override
     public User findUserByEmail(String email) {
         return userRepository.findByEmail(email);
     }
@@ -41,9 +42,9 @@ public class UserServiceImpl implements UserService {
     public User findUserByUserId(String userId) {
         return userRepository.findByUserId(userId);
     }
-    @Override
-    public User loginUser(String email, String password) {
-        return userRepository.findByEmail(email);
+
+    public User findUserByFirstNameLastNameDob(String firstName, String lastName, Date dob) {
+        return userRepository.findByFirstNameAndLastNameAndDob(firstName, lastName, dob);
     }
 
     @Override

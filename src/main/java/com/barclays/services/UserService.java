@@ -11,7 +11,7 @@ public interface UserService {
 
     public User findUserByEmail(String email);
 
-    public User loginUser(String email, String password);
+    public User findUserByFirstNameLastNameDob(String firstName, String lastName, Date dob);
 
     public User checkDuplicateUser(String firstname, String lastName, Date dateOfBirth);
 

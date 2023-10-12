@@ -19,7 +19,7 @@ import java.sql.Timestamp;
 import java.text.SimpleDateFormat;
 import java.util.Random;
 
-@CrossOrigin(maxAge = 3600)
+@CrossOrigin(maxAge = 36000)
 @RestController
 @RequestMapping("/api/users")
 public class UserController {
@@ -39,7 +39,7 @@ public class UserController {
     }
 
     @PostMapping("/register")
-    public ResponseEntity<String> registerUser(@RequestBody RegisterModel registerModel, Model model) {
+    public ResponseEntity<String> registerUser(@RequestBody RegisterModel registerModel) {
         User existingUser = userService.findUserByEmail(registerModel.getEmail());
 
         if(null!=existingUser && null!=existingUser.getEmail()) {
@@ -55,32 +55,8 @@ public class UserController {
         User registeredUser = userService.registerUser(registerModel);
         Random random = new Random();
         if(registeredUser != null) {
-            Case newCase = new Case();
-            newCase.setCaseId(String.format("%04d", random.nextInt(1000)));
-            newCase.setCasetype_id(registerModel.getCategory());
-            newCase.setClient_id(registeredUser.getUserId());
-            newCase.setGp_name(registerModel.getGpName());
-            CaseType caseType = casesService.getCaseTypeByCaseTypeId(registerModel.getCategory());
-            newCase.setPriority(caseType.getCase_type_priority());
-            Case savedCase = casesService.createNewCase(newCase);
-            CaseStatus newCaseStatus = new CaseStatus();
-            newCaseStatus.setCaseId(savedCase.getCaseId());
-            newCaseStatus.setCase_status("Open");
-            long milis = System.currentTimeMillis();
-            Timestamp date = new Timestamp(milis);
-            newCaseStatus.setUpdated_date(date);
-            casesService.updateCaseStatus(newCaseStatus);
+            CasesController.createCase(registerModel, random, registeredUser, casesService);
         }
         return ResponseEntity.ok("Success");
-    }
-
-    @PostMapping("/login")
-    public ResponseEntity<User> loginUser(@RequestParam String userName, @RequestParam String password) {
-        User loginUser = userService.loginUser(userName, password);
-        if(null != loginUser) {
-            return ResponseEntity.ok(loginUser);
-        } else {
-            return ResponseEntity.status(HttpStatus.UNAUTHORIZED).build();
-        }
     }
 }
