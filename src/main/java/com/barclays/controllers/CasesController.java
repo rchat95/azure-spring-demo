@@ -18,7 +18,7 @@ import com.barclays.entity.CaseType;
 import com.barclays.services.CasesService;
 import com.barclays.services.UserService;
 
-@CrossOrigin(maxAge = 36000)
+@CrossOrigin(origins = "https://ashy-field-0b069a510.3.azurestaticapps.net/", maxAge = 3600)
 @RestController
 @RequestMapping("/api/cases")
 public class CasesController {

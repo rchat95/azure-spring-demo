@@ -19,7 +19,7 @@ import java.sql.Timestamp;
 import java.text.SimpleDateFormat;
 import java.util.Random;
 
-@CrossOrigin(maxAge = 36000)
+@CrossOrigin(origins = "https://ashy-field-0b069a510.3.azurestaticapps.net/", maxAge = 3600)
 @RestController
 @RequestMapping("/api/users")
 public class UserController {
