@@ -6,9 +6,6 @@ import java.util.List;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Service;
 
-
-import com.barclays.dto.RegisterModel;
-
 import com.barclays.entity.Case;
 import com.barclays.entity.CaseStatus;
 import com.barclays.entity.CaseType;
@@ -58,7 +55,7 @@ public class CasesServiceImpl implements CasesService{
     @Override
     public CaseStatus findStatusByCaseId(String case_id){
         return caseStatusRepository.findByCaseId(case_id);
-
+    }
     @Override
     public CaseType getCaseTypeByCaseTypeId(String caseTypeId) {
         return caseTypeRepository.findByCaseTypeId(caseTypeId);

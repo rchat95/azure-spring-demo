@@ -13,6 +13,7 @@ import org.springframework.web.bind.annotation.RestController;
 import com.barclays.dto.CaseDetailDto;
 import com.barclays.entity.Case;
 import com.barclays.entity.CaseStatus;
+import com.barclays.entity.CaseType;
 import com.barclays.services.CasesService;
 import com.barclays.services.UserService;
 
@@ -30,9 +31,10 @@ public class CasesController {
     public ResponseEntity<CaseDetailDto> showCasesByCaseId(@PathVariable String id) {
         Case target_case = casesService.findByCaseId(id);
         CaseStatus target_CaseStatus = casesService.findStatusByCaseId(id);
+        CaseType target_casetype = casesService.getCaseTypeByCaseTypeId(target_case.getCasetype_id());
         CaseDetailDto target_casedetails= new CaseDetailDto(
             target_case.getCaseId(),
-            target_case.getCasetype(),
+            target_casetype.getCase_type(),
             target_case.getClient_id(),
             target_case.getAnonymous_name(),
             target_case.getGp_name(),
