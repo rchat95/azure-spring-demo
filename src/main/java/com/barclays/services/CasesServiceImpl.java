@@ -1,14 +1,20 @@
 package com.barclays.services;
 
+
+import java.util.List;
+
+import org.springframework.beans.factory.annotation.Autowired;
+import org.springframework.stereotype.Service;
+
+
 import com.barclays.dto.RegisterModel;
+
 import com.barclays.entity.Case;
 import com.barclays.entity.CaseStatus;
 import com.barclays.entity.CaseType;
 import com.barclays.repository.CaseStatusRepository;
 import com.barclays.repository.CaseTypeRepository;
 import com.barclays.repository.CasesRepository;
-import org.springframework.beans.factory.annotation.Autowired;
-import org.springframework.stereotype.Service;
 
 @Service
 public class CasesServiceImpl implements CasesService{
@@ -33,12 +39,30 @@ public class CasesServiceImpl implements CasesService{
         return newCase;
     }
 
+    @Override
     public CaseStatus updateCaseStatus(CaseStatus caseStatusDetail) {
         return caseStatusRepository.save(caseStatusDetail);
     }
 
+
+    @Override
+    public List<CaseStatus> findByProviderId(String providerId){
+        return caseStatusRepository.findByProviderId(providerId);
+    }
+
+    @Override
+    public List<Case> findByClientId(String clientId){
+        return casesRepository.findByClientId(clientId);
+    }
+
+    @Override
+    public CaseStatus findStatusByCaseId(String case_id){
+        return caseStatusRepository.findByCaseId(case_id);
+
+    @Override
     public CaseType getCaseTypeByCaseTypeId(String caseTypeId) {
         return caseTypeRepository.findByCaseTypeId(caseTypeId);
+
     }
 
 
